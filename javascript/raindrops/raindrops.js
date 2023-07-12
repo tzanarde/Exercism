@@ -1,17 +1,24 @@
+var raindropSounds = {
+	3: 'Pling',
+	5: 'Plang',
+	7: 'Plong',
+}
+
+function createRaindropSound(number) {
+	let raindrops = '';
+	Object.entries(raindropSounds).forEach(entry => {
+		if (number % entry[0] == 0) {
+			raindrops += entry[1];
+		};
+	})
+	return raindrops;
+}
+
 export function convert(number) {
-	var raindrops = '';
-	if (number % 3 == 0) {
-		raindrops += 'Pling';
-	}
-	if (number % 5 == 0) {
-		raindrops += 'Plang';
-	}
-	if (number % 7 == 0) {
-		raindrops += 'Plong';
-	}
-	if (raindrops === '') {
-		return raindrops + number;
+	let raindropSound = createRaindropSound(number);
+	if (raindropSound === '') {
+		return number.toString();
 	} else {
-		return raindrops;
+		return raindropSound;
 	}
 }
