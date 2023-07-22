@@ -11,46 +11,24 @@ export function toRoman(integer) {
   var roman = '';
 
   while (integer > 0) {
-    var lastValue = '';
-    var sequentialValues = 0;
     for(let [key, value] of numerals) {
-      if (sequentialValues < 3 && integer >= key) {
+      if (integer >= key) {
         roman += value;
         integer -= key;
-        if (lastValue == value) {
-          sequentialValues += 1;
-        } else {
-          sequentialValues = 0;
-          lastValue = value;
-        }
         break;
-      } else {
-        value.substring(-4);
-
-        // IIII  -> IV
-        // VIIII -> IX
-        // XIIII -> XIV
-        // LIIII -> LIV
-        // CIIII -> CIV
-        // DIIII -> DIV
-        // MIIII -> MIV
-
-        // XXXX  -> XL
-        // LXXXX -> XC
-        // CXXXX -> CXL
-        // DXXXX -> DXL
-        // MXXXX -> MXL
-
-        // CCCC  -> CD
-        // DCCCC -> CM
-        // MCCCC -> MCD
       }
     }
   }
 
-  return roman;
-  // CCLXXXXVIIII
-  // CCXCIX
-  // 299 -> 199 -> 99 -> 49 -> 39 -> 29 -> 19 -> 9 -> 4 -> 3 -> 2 -> 1 -> 0
+  roman = roman.replace('VIIII', 'IX');
+  roman = roman.replace('XIIII', 'XIV');
+  roman = roman.replace('LXXXX', 'XC');
+  roman = roman.replace('CXXXX', 'CXL');
+  roman = roman.replace('DCCCC', 'CM');
+  roman = roman.replace('MCCCC', 'MCD');
+  roman = roman.replace('IIII', 'IV');
+  roman = roman.replace('XXXX', 'XL');
+  roman = roman.replace('CCCC', 'CD');
 
+  return roman;
 };
