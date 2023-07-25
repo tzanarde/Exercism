@@ -15,7 +15,8 @@ export function score(x, y) {
     return points.outside;
   }
 
-  function tossRadius(x, y) {
-    return Math.hypot(x, y);
-  }
+}
+
+function tossRadius(x, y) {
+  return Math.hypot(x, y);
 }
