@@ -16,6 +16,6 @@ export function score(x, y) {
   }
 
   function tossRadius(x, y) {
-    return Math.sqrt(x**2 + y**2)
+    return Math.hypot(x, y);
   }
 }
