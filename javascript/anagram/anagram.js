@@ -1,8 +1,8 @@
 export function findAnagrams(target, candidates) {
   let anagramWords = [];
   for (const candidate in candidates) {
-    if (!isSameWord(target.toUpperCase(), candidates[candidate].toUpperCase()) &&
-        isAnagram(target.toUpperCase(), candidates[candidate].toUpperCase())) {
+    if (!isSameWord(target, candidates[candidate]) &&
+        isAnagram(target, candidates[candidate])) {
       anagramWords.push(candidates[candidate]);
     }
   }
@@ -10,18 +10,25 @@ export function findAnagrams(target, candidates) {
 }
 
 function isSameWord(target, candidate) {
-  return target == candidate;
+  return target.toUpperCase() == candidate.toUpperCase();
 }
 
 function isAnagram(target, candidate) {
-  // if (target.length != candidate.length) return false;
+  target = target.toUpperCase();
+  candidate = candidate.toUpperCase();
   for (const char in candidate) {
-    if (target.indexOf(candidate[char]) < 0) return false;
-    target = target.substr(0, target.indexOf(candidate[char])) + target.substr(target.indexOf(candidate[char]) + 1, target.length)
+    if (!hasLetter(target, candidate[char])) return false;
+    target = updateTarget(target, candidate[char])
   }
-  if (target.length == 0) {
-    return true;
-  } else {
-    return false;
-  }
+  if (target.length != 0) return false;
+  return true;
+}
+
+function hasLetter(target, char) {
+  return target.indexOf(char) >= 0;
+}
+
+function updateTarget(target, char) {
+  return target.substr(0, target.indexOf(char)) + target.substr(target.indexOf(char) + 1,
+         target.length);
 }
