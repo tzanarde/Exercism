@@ -1,39 +1,30 @@
 export function rows(rowsNumber) {
-  let pascalsTriangle = [];
+  let triangle = [];
   for (let row = 0; row < rowsNumber; row++) {
-    pascalsTriangle.push([]);
+    triangle.push([]);
     for (let number = 0; number <= row; number++) {
-      let newValue = leftValue(pascalsTriangle, row, number) + rightValue(pascalsTriangle, row, number);
-      if (newValue != 0) {
-        pascalsTriangle[row].push(newValue);
-      } else {
-        pascalsTriangle[row].push(1);
-      }
+      let newValue = leftValue(triangle, row, number) + rightValue(triangle, row, number);
+      if (newValue == 0) newValue = 1;
+      triangle[row].push(newValue);
     }
   }
-  return pascalsTriangle;
+  return triangle;
 }
 
-function hasLeftValue(pascalsTriangle, row, number) {
-  return pascalsTriangle[row - 1] && pascalsTriangle[row - 1][number - 1]
+function hasLeftValue(triangle, row, number) {
+  return triangle[row - 1] && triangle[row - 1][number - 1]
 }
 
-function hasRightValue(pascalsTriangle, row, number) {
-  return pascalsTriangle[row - 1] && pascalsTriangle[row - 1][number]
+function hasRightValue(triangle, row, number) {
+  return triangle[row - 1] && triangle[row - 1][number]
 }
 
-function leftValue(pascalsTriangle, row, number) {
-  if (hasLeftValue(pascalsTriangle, row, number)) {
-    return pascalsTriangle[row - 1][number - 1];
-  } else {
-    return 0;
-  }
+function leftValue(triangle, row, number) {
+  if (hasLeftValue(triangle, row, number)) return triangle[row - 1][number - 1];
+  return 0;
 }
 
-function rightValue(pascalsTriangle, row, number) {
-  if (hasRightValue(pascalsTriangle, row, number)) {
-    return pascalsTriangle[row - 1][number];
-  } else {
-    return 0;
-  }
+function rightValue(triangle, row, number) {
+  if (hasRightValue(triangle, row, number)) return triangle[row - 1][number];
+  return 0;
 }
