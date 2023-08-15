@@ -19,14 +19,11 @@ export function seeingDouble(deck) {
  * @returns {number[]} deck with triplicate 3s
  */
 export function threeOfEachThree(deck) {
-  console.log('A');
-  deck.reduce((accumulator, currentValue) => {
-    console.log('B');
-    if (currentValue == 3) {
-      deck.push(3);
-      deck.push(3);
-    }
-  })
+  return deck.reduce((accumulator, currentValue) => {
+    accumulator.push(currentValue);
+    if (currentValue == 3) accumulator.push(...[3,3]);
+    return accumulator;
+  }, [])
 }
 
 /**
