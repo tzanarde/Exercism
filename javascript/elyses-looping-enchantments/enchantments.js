@@ -23,12 +23,10 @@ export function cardTypeCheck(stack, card) {
  */
 export function determineOddEvenCards(stack, type) {
   let cardsCount = 0;
-  for(const number in stack) {
-    if (type) {
-      if (stack[number] % 2 == 0) cardsCount += 1;
-    } else {
-      if (stack[number] % 2 != 0) cardsCount += 1;
-    }
+  if (type) {
+    for(const i in stack) { if (stack[i] % 2 == 0) cardsCount += 1; }
+  } else {
+    for(const i in stack) { if (stack[i] % 2 != 0) cardsCount += 1; }
   }
   return cardsCount;
 }
