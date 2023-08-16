@@ -29,5 +29,9 @@ export function pizzaPrice(pizza, ...extras) {
  * @returns {number} the price of the total order
  */
 export function orderPrice(pizzaOrders) {
-  throw new Error('Please implement the orderPrice function');
+  let orderPrice = 0;
+  for (const pizza in pizzaOrders) {
+    orderPrice += pizzaPrice(pizzaOrders[pizza].pizza, ...pizzaOrders[pizza].extras);
+  }
+  return orderPrice;
 }
