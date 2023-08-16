@@ -48,7 +48,7 @@ describe('Position class', () => {
 });
 
 describe('ProgramWindow class', () => {
-  xtest('allows to create a new instance', () => {
+  test('allows to create a new instance', () => {
     const window = new ProgramWindow();
 
     expect(window.size).toBeInstanceOf(Size);
@@ -62,7 +62,7 @@ describe('ProgramWindow class', () => {
     expect(window.position.y).toBe(0);
   });
 
-  xtest('does NOT take parameters in the constructor function', () => {
+  test('does NOT take parameters in the constructor function', () => {
     const size = new Size(500, 400);
     const position = new Position(25, 15);
     const programWindow = new ProgramWindow(size, position);
@@ -75,7 +75,7 @@ describe('ProgramWindow class', () => {
 });
 
 describe('resize', () => {
-  xtest('provides a resize method', () => {
+  test('provides a resize method', () => {
     const programWindow = new ProgramWindow();
     const newSize = new Size(300, 200);
     programWindow.resize(newSize);
@@ -84,7 +84,7 @@ describe('resize', () => {
     expect(programWindow.size.height).toBe(200);
   });
 
-  xtest('does not resize below 1', () => {
+  test('does not resize below 1', () => {
     const programWindow = new ProgramWindow();
     const newSize = new Size(0, -10);
     programWindow.resize(newSize);
@@ -95,7 +95,7 @@ describe('resize', () => {
 });
 
 describe('move', () => {
-  xtest('provides a move method', () => {
+  test('provides a move method', () => {
     const programWindow = new ProgramWindow();
     const newPosition = new Position(525, 450);
     programWindow.move(newPosition);
@@ -104,7 +104,7 @@ describe('move', () => {
     expect(programWindow.position.y).toBe(450);
   });
 
-  xtest('move respects the lower bound for the position', () => {
+  test('move respects the lower bound for the position', () => {
     const programWindow = new ProgramWindow();
     const newPosition = new Position(-20, -10);
     programWindow.move(newPosition);
@@ -113,7 +113,7 @@ describe('move', () => {
     expect(programWindow.position.y).toBe(0);
   });
 
-  xtest('move respects limits due to screen and window size', () => {
+  test('move respects limits due to screen and window size', () => {
     const programWindow = new ProgramWindow();
     const newSize = new Size(100, 100);
     programWindow.resize(newSize);
@@ -124,7 +124,7 @@ describe('move', () => {
     expect(programWindow.position.y).toBe(500);
   });
 
-  xtest('resize respects limits due to position and screen size', () => {
+  test('resize respects limits due to position and screen size', () => {
     const programWindow = new ProgramWindow();
     const newPosition = new Position(710, 525);
     programWindow.move(newPosition);
