@@ -57,39 +57,43 @@ export class ProgramWindow {
         this.position = new Position();
     }
 
-    resize(size) {
-        this.size.width = resizeValue(size.width, this.position.x, this.screenSize.width);
-        this.size.height = resizeValue(size.height, this.position.y, this.screenSize.height);
+    resize(newSize) {
+        this.size.width = resizeValue(newSize.width, this.position.x, this.screenSize.width);
+        this.size.height = resizeValue(newSize.height, this.position.y, this.screenSize.height);
     }
 
-    move(position) {
-        this.position.x = positionValue(position.x, this.position.x, this.screenSize.width);
-        this.position.y = positionValue(position.y, this.position.y, this.screenSize.height);
+    move(newPosition) {
+        this.position.x = positionValue(newPosition.x, this.position.x, this.size.width, this.screenSize.width);
+        this.position.y = positionValue(newPosition.y, this.position.y, this.size.height, this.screenSize.height);
     }
 }
 
 function resizeValue(valueToResize, currentPosition, screenSize) {
     if (valueToResize < 1) return 1;
     if (valueToResize >= 1) {
-        if (valueToResize > spaceLeft(screenSize, currentPosition)) {
-            return spaceLeft(screenSize, currentPosition);
+        if (valueToResize > resizeLeft(screenSize, currentPosition)) {
+            return resizeLeft(screenSize, currentPosition);
         } else {
             return valueToResize;
         }
     }
 }
 
-function positionValue(valueToMove, currentPosition, screenSize) {
+function resizeLeft(screenSize, currentPosition) {
+    return screenSize - currentPosition;
+}
+
+function positionValue(valueToMove, currentPosition, programSize, screenSize) {
     if (valueToMove < 0) return 0;
     if (valueToMove >= 0) {
-        if (valueToMove > spaceLeft(screenSize, currentPosition)) {
-            return spaceLeft(screenSize, currentPosition);
+        if (valueToMove > moveLeft(screenSize, programSize, currentPosition)) {
+            return moveLeft(screenSize, programSize, currentPosition);
         } else {
-            return currentPosition;
+            return valueToMove;
         }
     }
 }
 
-function spaceLeft(screenSize, currentPosition) {
-    return screenSize - currentPosition;
+function moveLeft(screenSize, programSize, currentPosition) {
+    return screenSize - programSize - currentPosition;
 }

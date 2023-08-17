@@ -137,7 +137,7 @@ describe('move', () => {
 });
 
 describe('changeWindow', () => {
-  xtest('resizes the window', () => {
+  test('resizes the window', () => {
     const programWindow = new ProgramWindow();
     const updatedWindow = changeWindow(programWindow);
 
@@ -145,7 +145,7 @@ describe('changeWindow', () => {
     expect(updatedWindow.size.height).toBe(300);
   });
 
-  xtest('moves the window', () => {
+  test('moves the window', () => {
     const programWindow = new ProgramWindow();
     const updatedWindow = changeWindow(programWindow);
 
@@ -153,7 +153,7 @@ describe('changeWindow', () => {
     expect(updatedWindow.position.y).toBe(150);
   });
 
-  xtest('returns the same instance that was passed in', () => {
+  test('returns the same instance that was passed in', () => {
     const programWindow = new ProgramWindow();
     const updatedWindow = changeWindow(programWindow);
 
