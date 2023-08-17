@@ -68,32 +68,38 @@ export class ProgramWindow {
     }
 }
 
+export function changeWindow(programWindow) {
+    programWindow.resize(new Size(400, 300));
+    programWindow.move(new Position(100, 150));
+    return programWindow;
+}
+
 function resizeValue(valueToResize, currentPosition, screenSize) {
     if (valueToResize < 1) return 1;
     if (valueToResize >= 1) {
-        if (valueToResize > resizeLeft(screenSize, currentPosition)) {
-            return resizeLeft(screenSize, currentPosition);
+        if (valueToResize > spaceRemainingToResize(screenSize, currentPosition)) {
+            return spaceRemainingToResize(screenSize, currentPosition);
         } else {
             return valueToResize;
         }
     }
 }
 
-function resizeLeft(screenSize, currentPosition) {
+function spaceRemainingToResize(screenSize, currentPosition) {
     return screenSize - currentPosition;
 }
 
 function positionValue(valueToMove, currentPosition, programSize, screenSize) {
     if (valueToMove < 0) return 0;
     if (valueToMove >= 0) {
-        if (valueToMove > moveLeft(screenSize, programSize, currentPosition)) {
-            return moveLeft(screenSize, programSize, currentPosition);
+        if (valueToMove > spaceRemainingToMove(screenSize, programSize, currentPosition)) {
+            return spaceRemainingToMove(screenSize, programSize, currentPosition);
         } else {
             return valueToMove;
         }
     }
 }
 
-function moveLeft(screenSize, programSize, currentPosition) {
+function spaceRemainingToMove(screenSize, programSize, currentPosition) {
     return screenSize - programSize - currentPosition;
 }
