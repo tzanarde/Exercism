@@ -1,20 +1,16 @@
 class Raindrops
   def self.convert(number)
-    raindrop_sounds = ''
+    raindrops_sounds = ''
     factor = Factor.new(number)
-    raindrop_sounds += 'Pling' if factor.divisible_by_3?
-    raindrop_sounds += 'Plang' if factor.divisible_by_5?
-    raindrop_sounds += 'Plong' if factor.divisible_by_7?
-    if raindrop_sounds.empty?
-      number.to_s
-    else
-      raindrop_sounds
-    end
+    raindrops_sounds += 'Pling' if factor.divisible_by_3?
+    raindrops_sounds += 'Plang' if factor.divisible_by_5?
+    raindrops_sounds += 'Plong' if factor.divisible_by_7?
+    return number.to_s if raindrops_sounds.empty?
+    raindrops_sounds
   end
 end
 
 class Factor
-
   def initialize(number)
     @number = number
   end
