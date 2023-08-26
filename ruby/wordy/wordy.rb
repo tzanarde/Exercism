@@ -3,32 +3,33 @@ class WordProblem
   SUPPORTED_OPERATIONS = ['plus', 'minus', 'multiplied', 'divided']
 
   def initialize(problem)
-    @splitted_problem = problem.downcase.gsub('what is ', '')
+    @problem_elements = problem.downcase.gsub('what is ', '')
                                         .gsub('by', '')
                                         .gsub('?', '')
                                         .split(' ')
+
   end
 
   def answer
     @numbers = []
     @operations = []
-    @splitted_problem.each do |element|
-      add_element!(element)
+    @problem_elements.each do |element|
+      distribute_element!(element)
     end
     problem_answer = @numbers[0].to_i
     @operations.each_with_index do |operation, index|
-      current_number_to_calculate = @numbers[index + 1].to_i
-      problem_answer += current_number_to_calculate if plus_operation?(operation)
-      problem_answer -= current_number_to_calculate if minus_operation?(operation)
-      problem_answer *= current_number_to_calculate if multiply_operation?(operation)
-      problem_answer /= current_number_to_calculate if division_operation?(operation)
+      current_number = @numbers[index + 1].to_i
+      problem_answer += current_number if plus_operation?(operation)
+      problem_answer -= current_number if minus_operation?(operation)
+      problem_answer *= current_number if multiply_operation?(operation)
+      problem_answer /= current_number if division_operation?(operation)
     end
     problem_answer
   end
 
   private
 
-  def add_element!(element)
+  def distribute_element!(element)
     if numeric?(element)
       @numbers << element
     elsif supported_operation?(element)
