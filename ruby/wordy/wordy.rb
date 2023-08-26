@@ -3,34 +3,40 @@ class WordProblem
   SUPPORTED_OPERATIONS = ['plus', 'minus', 'multiplied', 'divided']
 
   def initialize(problem)
-    @problem = problem.downcase
+    @splitted_problem = problem.downcase.gsub('what is ', '')
+                                        .gsub('by', '')
+                                        .gsub('?', '')
+                                        .split(' ')
   end
 
   def answer
-    numbers = []
-    operations = []
-    @problem.gsub('what is ', '').gsub('by', '').gsub('?', '').split(' ').each do |element|
-      if numeric?(element)
-        numbers << element
-      elsif supported_operation?(element)
-        operations << element
-      else
-        raise ArgumentError
-      end
+    @numbers = []
+    @operations = []
+    @splitted_problem.each do |element|
+      add_element!(element)
     end
-    index = 0
-    calculation_result = numbers[0].to_i
-    operations.each do |operation|
-      calculation_result += numbers[index + 1].to_i if plus_operation?(operation)
-      calculation_result -= numbers[index + 1].to_i if minus_operation?(operation)
-      calculation_result *= numbers[index + 1].to_i if multiply_operation?(operation)
-      calculation_result /= numbers[index + 1].to_i if division_operation?(operation)
-      index += 1
+    problem_answer = @numbers[0].to_i
+    @operations.each_with_index do |operation, index|
+      current_number_to_calculate = @numbers[index + 1].to_i
+      problem_answer += current_number_to_calculate if plus_operation?(operation)
+      problem_answer -= current_number_to_calculate if minus_operation?(operation)
+      problem_answer *= current_number_to_calculate if multiply_operation?(operation)
+      problem_answer /= current_number_to_calculate if division_operation?(operation)
     end
-    calculation_result
+    problem_answer
   end
 
   private
+
+  def add_element!(element)
+    if numeric?(element)
+      @numbers << element
+    elsif supported_operation?(element)
+      @operations << element
+    else
+      raise ArgumentError
+    end
+  end
 
   def plus_operation?(operation)
     operation == 'plus'
