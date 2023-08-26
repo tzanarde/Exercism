@@ -1,19 +1,14 @@
 module SavingsAccount
-  INTEREST_RATES = { positive_less_than_1000: 0.5,
-                     positive_between_1000_and_5000: 1.621,
-                     positive_greater_than_5000: 2.475,
-                     negative: 3.213, }
+  RATES = { between_0_and_1000: 0.5,
+            between_1000_and_5000: 1.621,
+            greater_than_5000: 2.475,
+            negative: 3.213, }
 
   def self.interest_rate(balance)
-    if balance >= 0 and balance < 1000
-      INTEREST_RATES[:positive_less_than_1000]
-    elsif balance >= 1000 and balance < 5000
-      INTEREST_RATES[:positive_between_1000_and_5000]
-    elsif balance >= 5000
-      INTEREST_RATES[:positive_greater_than_5000]
-    else
-      INTEREST_RATES[:negative]
-    end
+    return RATES[:negative] if balance.negative?
+    return RATES[:between_0_and_1000] if balance < 1000
+    return RATES[:between_1000_and_5000] if balance < 5000
+    RATES[:greater_than_5000]
   end
 
   def self.annual_balance_update(balance)
