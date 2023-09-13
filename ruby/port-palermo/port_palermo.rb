@@ -6,7 +6,13 @@ module Port
   end
 
   def self.get_terminal(ship_identifier)
-    return :A if ['OIL', 'GAS'].include? ship_identifier.to_s[0..2]
+    return :A if ['OIL', 'GAS'].include? cargo_type(ship_identifier)
     :B
+  end
+
+  private
+
+  def self.cargo_type(ship_identifier)
+    ship_identifier.to_s[0..2]
   end
 end
