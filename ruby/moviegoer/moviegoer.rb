@@ -1,6 +1,8 @@
 class NotMovieClubMemberError < RuntimeError; end
 
 class Moviegoer
+  attr_reader :age, :member
+
   REGULAR_TICKET_PRICE = 10.00
   SENIORS_TICKET_PRICE = 15.00
 
