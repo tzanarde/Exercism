@@ -45,3 +45,5 @@ ___
 |       |     |    |     |
 |-------------|-------------|--------------|--------------|
 | 🟢 Done     | Learning    | [Exercism](https://exercism.org/tracks/javascript/exercises/custom-signs) | [Repository](https://github.com/tzanarde/Exercism/tree/main/javascript/custom-signs)|
+
+Solutions created by [Tiago Zanarde](https://tiagozanarde.dev).
